@@ -1,27 +1,34 @@
-import requests
-from kafka import KafkaProducer
+from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField, StringType, LongType, TimestampType
 
-# Configuration de la connexion Kafka
-bootstrap_servers = ['localhost:9092']
-topic_name = 'mon-topic'
+WRITE_PATH = "/data"
 
-# Création du producteur Kafka
-producer = KafkaProducer(bootstrap_servers=bootstrap_servers)
+spark = SparkSession.builder.appName('transformParquet').getOrCreate()
 
-# Appel de l'API et envoi des données à Kafka
+SCHEMA = StructType([
+    StructField("ID", LongType()),
+    StructField("TITLE", StringType()),
+    StructField("TEXT", StringType()),
+    StructField("URL", StringType()),
+    StructField("IMAGE_URL", StringType()),
+    StructField("PUBLISH_DATE", TimestampType()),
+    StructField("AUTHOR", StringType()),
+    StructField("LANGUAGE", StringType()),
+    StructField("PAYS_SOURCE", StringType()),
+    StructField("SENTIMENT", LongType())
+])
 
-url = 'https://api.worldnewsapi.com/search-news?text=Ford, Mercedes, Volkswagen, bmw, toyota, hyundai'
-api_key = '5ab60f9d8cab4f39bddabfc9dd38c452'
-source='us, uk'
-params = {
-    'analyze': True,
-    'source-countries': source,
-    'api-key': api_key
-   
-}
-while True:
-    response = requests.get(url, params=params)
-    data = response.json()
-    print("mydata : " + data)
-   # producer.send(topic_name, str(data).encode('utf-8'))
 
+
+
+
+
+
+
+
+spark.read\
+    .option("multiline", "true")\
+    .json(files, schema=SCHEMA)\
+    .write\
+    .mode('overwrite')\
+    .parquet(join(WRITE_PATH, folder.split('/')[-1]))
