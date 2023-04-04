@@ -1,7 +1,28 @@
-from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, LongType, TimestampType
 import time
 from pyspark.sql import SparkSession
+
+KAFKA_BOOTSTRAP_SERVERS = "kafka:9092"
+KAFKA_TOPIC = "trafic_cars"
+
+SCHEMA = StructType([
+    StructField("value", StringType()),
+    StructField("manufacturer", StringType()),
+    StructField("year", StringType()),
+    StructField("price", StringType()),
+    StructField("transmission", StringType()),
+    StructField("mileage", StringType()),
+    StructField("fuelType", StringType()),
+    StructField("tax", StringType()),
+    StructField("mpg", StringType()),
+    StructField("model_index", StringType()),
+    StructField("manufacturer_index", StringType()),
+    StructField("transmission_index", StringType()),
+    StructField("fuelType_index", StringType()),
+
+])
+
+
 spark = SparkSession.builder\
         .appName("SparkML") \
         .config("spark.some.config.option", "some-value")\
@@ -10,29 +31,44 @@ spark = SparkSession.builder\
         .getOrCreate()
 
 
-# df2 = spark.read.option("header","false").option("delimiter",';').csv("/../../../src/testdata")
-df = spark.read.option("header","true").option("delimiter",';').csv("/../../../src/testdata")
-df = df.collect()
-for i in range(len(df)):
-    message = df[i]  # Code pour récupérer le prochain message à envoyer
-    print(message)  # Code pour envoyer le message
-    time.sleep(0.1)  # Délai de 100 millisecondes entre chaque message
 
+spark.sparkContext.setLogLevel("WARN") # Reduce logging verbosity
 
-spark = SparkSession.builder.appName('transformParquet').getOrCreate()
+df = spark.read.option("header","false").option("delimiter",',').schema(SCHEMA).format("csv").load("/../../../src/testdata1")
 
-SCHEMA = StructType([
-    StructField("ID", LongType()),
-    StructField("TITLE", StringType()),
-    StructField("TEXT", StringType()),
-    StructField("URL", StringType()),
-    StructField("IMAGE_URL", StringType()),
-    StructField("PUBLISH_DATE", TimestampType()),
-    StructField("AUTHOR", StringType()),
-    StructField("LANGUAGE", StringType()),
-    StructField("PAYS_SOURCE", StringType()),
-    StructField("SENTIMENT", LongType())
-])
+# df = df.collect()
+# for i in range(len(df)):
+#     message = df[i]
+#     print(message)  
+#     time.sleep(1)
+
+# Write one row at a time to the topic
+
+for row in df.collect():
+
+    # transform row to dataframe
+    df_row = spark.createDataFrame([row.asDict()])
+    print(df_row)
+    # df_row = df.selectExpr("model"(struct([col(c) for c in df.columns])).alias("value"))
+
+    # write to topic
+    df_row.write\
+        .format("kafka")\
+        .option("kafka.bootstrap.servers", KAFKA_BOOTSTRAP_SERVERS)\
+        .option("topic", KAFKA_TOPIC)\
+        .save()
+
+    print(f"Row written to topic {KAFKA_TOPIC}")
+    time.sleep(2.5)
+
+# df_traffic_stream = spark.read.format("parquet")\
+#     .schema(SCHEMA)\
+#     .load(FILE_PATH)\
+#     .withColumn("value", F.to_json( F.struct(F.col("*")) ) )\
+#     .withColumn("key", F.lit("key"))\
+#     .withColumn("value", F.encode(F.col("value"), "iso-8859-1").cast("binary"))\
+#     .withColumn("key", F.encode(F.col("key"), "iso-8859-1").cast("binary"))\
+#     .limit(50000)
 
 print("hello")
 
