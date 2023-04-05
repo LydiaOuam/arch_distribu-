@@ -19,20 +19,18 @@ spark = SparkSession.builder\
 SCHEMA = StructType([
     StructField("value", StringType()),
     StructField("manufacturer", StringType()),
-    StructField("year", LongType()),
-    StructField("price", LongType()),
+    StructField("year", StringType()),
+    StructField("price", StringType()),
     StructField("transmission", StringType()),
     StructField("mileage", StringType()),
     StructField("fuelType", StringType()),
-    StructField("tax", LongType()),
-    StructField("mpg", LongType()),
-    StructField("engineSize", LongType()),
+    StructField("tax", StringType()),
+    StructField("mpg", StringType()),
+    StructField("engineSize", StringType()),
     StructField("model_index", StringType()),
-    StructField("manufacturer_index", LongType()),
-    StructField("transmission_index", LongType()),
-    StructField("fuelType_index", LongType()),
-    StructField("features", StringType()),
-    StructField("featuresNormalized", StringType())
+    StructField("manufacturer_index", StringType()),
+    StructField("transmission_index", StringType()),
+    StructField("fuelType_index", StringType())
 ])
 
 spark.sparkContext.setLogLevel("WARN")

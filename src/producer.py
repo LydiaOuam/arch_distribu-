@@ -6,34 +6,30 @@ from pyspark.sql.functions import from_json, col
 from pyspark.ml.feature import MinMaxScaler, VectorAssembler
 
 
-KAFKA_BOOTSTRAP_SERVERS = "kafka:9092"
-KAFKA_TOPIC = "trafic_cars"
-
-SCHEMA = StructType([
-    StructField("value", StringType()),
-    StructField("manufacturer", StringType()),
-    StructField("year", StringType()),
-    StructField("price", StringType()),
-    StructField("transmission", StringType()),
-    StructField("mileage", StringType()),
-    StructField("fuelType", StringType()),
-    StructField("tax", StringType()),
-    StructField("mpg", StringType()),
-    StructField("engineSize", StringType()),
-    StructField("model_index", StringType()),
-    StructField("manufacturer_index", StringType()),
-    StructField("transmission_index", StringType()),
-    StructField("fuelType_index", StringType()),
-    StructField("featuresNormalized", StringType()),
-])
-
-
 spark = SparkSession.builder\
         .appName("SparkML") \
         .config("spark.some.config.option", "some-value")\
         .master("spark://0622870c1427:7077") \
         .config("spark.executor.memory", "3g") \
         .getOrCreate()
+
+KAFKA_BOOTSTRAP_SERVERS = "kafka:9092"
+KAFKA_TOPIC = "trafic_cars"
+
+SCHEMA = StructType([
+    StructField("model_index", StringType()),
+    StructField("manufacturer_index", StringType()),
+    StructField("transmission_index", StringType()),
+    StructField("fuelType_index", StringType()),
+    StructField("tax", StringType()),
+    StructField("mpg", StringType()),
+    StructField("year", StringType()),
+    StructField("mileage", StringType()),
+    StructField("price", StringType())
+    ])
+
+
+
 
 
 
@@ -59,7 +55,7 @@ for row in df.collect():
     print(row)
 
     # # transform row to dataframe
-    # df_row = spark.createDataFrame( [(row)], ["vector"])
+    df_row = spark.createDataFrame([row.asDict()])
    
     # # Prepare vecors of features
 
@@ -86,13 +82,13 @@ for row in df.collect():
     # scalerModel = scaler.fit(output)
     # scaledData = scalerModel.transform(output)
 
-    # print(scaledData)
+    print(df_row)
     # df_row = df.selectExpr("model"(struct([col(c) for c in df.columns])).alias("value"))
     time.sleep(2.5)
 
 
     # write to topic
-    row.write\
+    df_row.write\
         .format("kafka")\
         .option("kafka.bootstrap.servers", KAFKA_BOOTSTRAP_SERVERS)\
         .option("topic", KAFKA_TOPIC)\
