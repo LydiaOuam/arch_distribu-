@@ -1,4 +1,4 @@
-# Projet Architecture BDD
+# Projet Architecture Distribué (Kafka Stream)
 
 ---------------------------------------------------------------
 # La description du projet
@@ -7,7 +7,8 @@ Ce projet est réalisé dans le cadre du TP noté du module Architecture Distrib
 Le but de ce projet est d'utiliser kafka pour manipuler des données qui provient de différentes sources en Streaming.
 Comprendre la force de Kafka qui réside dans le fait que cet outil peut ingérer des données réels qui provient de différentes sources.
 Traiter ces données en temps réel et cela en utilisant SparkStreaming par exemple, aussi diffuser ces données.
-Un autre point fort de cet outil c'est qu'il permet d'utiliser la notion des Windows pour aggréger les données en utilisant des intervalles de temps débutant de l'ordre des millisecondes. 
+Un autre point fort de cet outil c'est qu'il permet d'utiliser la notion des Windows pour aggréger les données en utilisant des intervalles de temps débutant de l'ordre des millisecondes.
+
 ---------------------------------------------------------------
 # Ce qui faut savoir
 ---------------------------------------------------------------
@@ -19,19 +20,21 @@ Pour notre Cas on a créer un docker compose qui est constitué de kafka, zookee
 Nos Script sont sauvegardés dans le volume paratgé src. Pour lancer un script pyspark faut rentrer dans l'image docker et exécuter cette commande dans le bin  :
 ```
 spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.2 pathFile
+```
 
 ---------------------------------------------------------------
 # La Data
 ---------------------------------------------------------------
 Deux Sources de données sont utilisé pour ce projet : 
 1. Des données de News concernant des marques spécifiques de voitures collecté en utilisant l'API ayelien
-2. Des données de voiture qui contient plusieurs caractéristique et qu'on a pu récupérer sur Kaggle[ https://www.kaggle.com/datasets/adityadesai13/used-car-dataset-ford-and-mercedes].
+2. Des données de voiture qui contient plusieurs caractéristique et qu'on a pu récupérer sur [Kaggle](https://www.kaggle.com/datasets/adityadesai13/used-car-dataset-ford-and-mercedes).
 
 ---------------------------------------------------------------
 # Développement
 ---------------------------------------------------------------
 Pour nous l'objectif était de streamer deux sources de données.
 Une étant les données des voitures qu'on a récupérer sur kaggle, en simulant un stream on pourra imaginer une application derriéres utilisées par des gens et qui remplissent les caracteristique de leurs voitures, ces caracteristiques seront utilisé dans le modée de ML qu'on a développé sur spark et qu'on sauvegarder sous format parquet
+
 ---------------------------------------------------------------
 # Visualisations
 ---------------------------------------------------------------
