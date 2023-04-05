@@ -61,6 +61,7 @@ Cette figure montre un _treemap_ composé de trois couches la premiére représe
 
 Face à un contexte complétement nouveau pour nous, et aussi le manque de ressources existante sur internet, on a remarqué qu'on passe beaucoup de temps à chercher à comprendre le fonctionnement des choses, et donc par conséquent peu de temps productif en concrét.
 Le cours est trés intéressant mais trés vaste. 
+Le Choix du sujet.
 
 ---------------------------------------------------------------
 # Collaborateurs
