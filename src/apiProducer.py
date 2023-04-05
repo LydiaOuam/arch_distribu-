@@ -13,6 +13,7 @@ from kafka import KafkaProducer
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import to_json, struct, col, lit, from_json, column
 from pyspark.sql.types import StringType, FloatType, TimestampType, StructType, StructField
+
 # Initialize Spark Session
 spark = SparkSession.builder\
         .appName("SparkML") \
@@ -20,8 +21,9 @@ spark = SparkSession.builder\
         .master("spark://0622870c1427:7077") \
         .config("spark.executor.memory", "3g") \
         .getOrCreate()
+spark.sparkContext.setLogLevel("WARN") # Reduce logging verbosity
 
-KAFKA_BOOTSTRAP_SERVERS = "broker:9092"
+KAFKA_BOOTSTRAP_SERVERS = "kafka:9092"
 KAFKA_TOPIC = "aylien_news"
 
 # Define the schema for the Aylien API data
@@ -74,6 +76,7 @@ def fetch_and_send_data():
         }
         
         df_row = spark.createDataFrame([row])
+        print(row)
 
         # Send the data to Kafka
         df_row.write\
@@ -81,11 +84,13 @@ def fetch_and_send_data():
         .option("kafka.bootstrap.servers", KAFKA_BOOTSTRAP_SERVERS)\
         .option("topic", KAFKA_TOPIC)\
         .save()
+        print(f"Row written to topic {KAFKA_TOPIC}")
+
 
 # Fetch data from Aylien API every 60 seconds
 while True:
     fetch_and_send_data()
-    time.sleep(60)
+    time.sleep(2.5)
 
 
 # # Read the data from Kafka topic
