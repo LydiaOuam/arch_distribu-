@@ -26,6 +26,8 @@ spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.2 pathFil
 - _Streamlit_: Streamlit est un framework web facile à utiliser pour les développeurs Python qui permet de créer des applications web interactives pour l'analyse de données. Il permet également de visualiser les données et de les présenter de manière esthétique, ce qui le rend parfait pour le développement de l'interface utilisateur.
 - _Aylien API_: L'API Aylien est une API de traitement du langage naturel qui permet de réaliser des analyses de sentiment sur les articles de presse. Elle a été choisie pour extraire les données des articles de presse pour ce projet.
 - _Kaggle_:Kaggleestuneplateformedecompétitiondedonnéesenlignequiproposedes ensembles de données pour des projets de science des données. L'ensemble de données de prix des voitures a été téléchargé depuis Kaggle pour ce projet.
+- _PySpark_ : Bibliothèque open-source de traitement de données distribuées conçue pour être utilisée avec Apache Spark.
+- _Kafka_ : Kafka est une plate-forme de diffusion de données distribuée open-source qui permet de transférer des flux de données en temps réel entre des applications ou des systèmes.
 
 ---------------------------------------------------------------
 # La Data
