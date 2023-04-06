@@ -27,7 +27,9 @@ spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.2 pathFil
 ---------------------------------------------------------------
 Deux Sources de données sont utilisé pour ce projet : 
 1. Des données de News concernant des marques spécifiques de voitures collecté en utilisant [l'API Aylien](https://aylien.com)
-3. Des données de voiture qui contient plusieurs caractéristique et qu'on a pu récupérer sur [Kaggle](https://www.kaggle.com/datasets/adityadesai13/used-car-dataset-ford-and-mercedes).
+3. Des données de voiture qui contient plusieurs caractéristique et qu'on a pu récupérer sur 
+
+
 
 ---------------------------------------------------------------
 # Développement
@@ -38,21 +40,23 @@ Une étant les données des voitures qu'on a récupérer sur kaggle, en simulant
 ---------------------------------------------------------------
 # Visualisations
 ---------------------------------------------------------------
-Sur ce graphe on peut voir en orange les prix des bitcoins et en bleu le nombre de tweets, on peut remarquer que l'augmentation des prix des bitcoins suit la hausse des nombre des tweets.
-
-Faut aussi savoir que les prix des cryptos sont influencé par plusieurs autre éléments comme : l'offre et la demande, incertitudes politiques et économiques, ...
-
-<img width="900" alt="Capture d’écran 2023-01-20 à 12 08 36" src="https://user-images.githubusercontent.com/84903904/214848632-d64eae7d-e3ac-4a26-9d20-46c9c74798e2.png">
-
-Cette Image on peut voir l'évolution de prix de 4 différentes cryptos. 
-
-<img width="900" alt="Capture d’écran 2023-01-20 à 12 08 36" src="https://user-images.githubusercontent.com/84903904/214862466-56445bb0-713f-4b3a-90d9-d476e962db6d.png">
+Sur ce graphe on peut voir les cinq types des voitures; Ford, Toyota, Hyundai, Mercedes, Volkswagen, BMW. En appliquant un barplot, la dataframe des news, nous avons ici en vert, les news positif sur chaque marque de voiture qui ont ete publie recemment, en orange nous avons les news neutral, et en bleu les news negatifs.
 
 
+![type_sentiment](https://user-images.githubusercontent.com/92854230/230239363-e4f3a1e5-121c-4a4b-80eb-af6690eed00a.png)
 
-Cette figure montre un _treemap_ composé de trois couches la premiére représente le nom de la crypto, la deuxiéme est l'heure et la troisiéme c'est le prix, les informations qu'on voit sur le _treemap_ sont les données des derniéres 24H.
 
-<img width="835" alt="Capture d’écran 2023-01-26 à 14 56 34" src="https://user-images.githubusercontent.com/84903904/214854013-728054cf-a773-42a6-b906-1278ab07d4fe.png">
+Dans cette etape, nous allons decouvrir la deuxieme donnee, qui constitue des models et manufacturer des voitures avec leur prix plus d'autre characteristic. 
+
+
+Cette figure montre les manufacturer des voitures avec les moyens des prix de leurs models, en se basant sur cette dataframe nous pourrons creer la visualisation suivante.
+
+![image](https://user-images.githubusercontent.com/92854230/230239613-da32bcc4-dc02-4a14-9a83-c07ec7c9c54a.png)
+
+Cette visualisation constitue d'un barplot chart des moyens des prix de chaque manufacturer avec leur noms, elle nous montre que en gros la marque Mercedes est la plus chere en se basant sur tous les models, par contre la marque Opel a le prix tres bas.
+
+
+![barplot_price](https://user-images.githubusercontent.com/92854230/230239433-5398b699-d6dc-487e-b24f-8ee5d209e911.png)
 
 
 ---------------------------------------------------------------
