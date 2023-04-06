@@ -69,7 +69,7 @@ predictions = loaded_model.transform(output)
 # json_df = spark.read.schema(SCHEMA).json(value)
 # print("hello")
 
-query = predictions\
+query = output\
     .writeStream \
     .outputMode("append") \
     .format("console") \

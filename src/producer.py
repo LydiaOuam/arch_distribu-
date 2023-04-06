@@ -43,11 +43,7 @@ df = spark.read \
     .withColumn("key", F.lit("key"))\
     .withColumn("value", F.encode(F.col("value"), "iso-8859-1").cast("binary"))\
     .withColumn("key", F.encode(F.col("key"), "iso-8859-1").cast("binary"))
-# df = df.collect()
-# for i in range(len(df)):
-#     message = df[i]
-#     print(message)  
-#     time.sleep(1)
+
 
 # Write one row at a time to the topic
 
@@ -56,31 +52,6 @@ for row in df.collect():
 
     # # transform row to dataframe
     df_row = spark.createDataFrame([row.asDict()])
-   
-    # # Prepare vecors of features
-
-    # df_row = df_row.withColumn("mileage", col("mileage").cast("double"))
-    # df_row = df_row.withColumn("tax", col("tax").cast("double"))
-    # df_row = df_row.withColumn("mpg", col("mpg").cast("double"))
-    # df_row = df_row.withColumn("engineSize", col("engineSize").cast("double"))
-    # df_row = df_row.withColumn("price", col("price").cast("double"))
-    # df_row = df_row.withColumn("year", col("year").cast("double"))
-
-    # df_row = df_row.withColumn("model_index", col("model_index").cast("double"))
-    # df_row = df_row.withColumn("manufacturer_index", col("manufacturer_index").cast("double"))
-    # df_row = df_row.withColumn("transmission_index", col("transmission_index").cast("double"))
-    # df_row = df_row.withColumn("fuelType_index", col("fuelType_index").cast("double"))
-
-    # # Prepare vecors of features
-    # # Assemble input features into a vector
-    # assembler = VectorAssembler(inputCols=[ "model_index","manufacturer_index","transmission_index","fuelType_index","tax","year","mpg","mileage"], outputCol='features',handleInvalid="skip")
-    # output = assembler.transform(df_row)
-
-    # #Normalize data with a MinMax Scaler 
-    # scaler = MinMaxScaler(inputCol="features", outputCol="featuresNormalized")
-    # # Compute summary statistics and generate MinMaxScalerModel
-    # scalerModel = scaler.fit(output)
-    # scaledData = scalerModel.transform(output)
 
     print(df_row)
     # df_row = df.selectExpr("model"(struct([col(c) for c in df.columns])).alias("value"))
@@ -96,16 +67,6 @@ for row in df.collect():
 
     print(f"Row written to topic {KAFKA_TOPIC}")
 
-# df_traffic_stream = spark.read.format("parquet")\
-#     .schema(SCHEMA)\
-#     .load(FILE_PATH)\
-#     .withColumn("value", F.to_json( F.struct(F.col("*")) ) )\
-#     .withColumn("key", F.lit("key"))\
-#     .withColumn("value", F.encode(F.col("value"), "iso-8859-1").cast("binary"))\
-#     .withColumn("key", F.encode(F.col("key"), "iso-8859-1").cast("binary"))\
-#     .limit(50000)
-
-print("hello")
 
 
 
@@ -113,9 +74,4 @@ print("hello")
 
 
 
-# spark.read\
-#     .option("multiline", "true")\
-#     .json(files, schema=SCHEMA)\
-#     .write\
-#     .mode('overwrite')\
-#     .parquet(join(WRITE_PATH, folder.split('/')[-1]))
+
