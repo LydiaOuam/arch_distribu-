@@ -42,7 +42,12 @@ Deux Sources de données sont utilisé pour ce projet :
 # Développement
 ---------------------------------------------------------------
 Pour nous l'objectif était de streamer deux sources de données.
-Une étant les données des voitures qu'on a récupérer sur kaggle, en simulant un stream on pourra imaginer une application derriéres utilisées par des gens et qui remplissent les caracteristique de leurs voitures, ces caracteristiques seront utilisé dans le modée de ML qu'on a développé sur spark et qu'on sauvegarder sous format parquet
+Une étant les données des voitures qu'on a récupérer sur kaggle, en simulant un stream on pourra imaginer une
+application derriéres utilisées par des gens et qui remplissent les caracteristique de leurs voitures,
+ces caracteristiques seront utilisé dans le
+modéle de ML qu'on a développé sur spark et qu'on sauvegarder sous format parquet pour estimer le prix de la voiture.
+En deuxiéme on a récuperer des données sur l'API Aylien, car on voulait etudier l'impact des NEWS sur les prix des voitures.
+On veut streamer cela et calculer à l'aide des window le nombre de News arrivant pour chaque marque.
 
 ---------------------------------------------------------------
 # Visualisations
