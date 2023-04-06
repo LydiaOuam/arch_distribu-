@@ -34,7 +34,7 @@ spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.2 pathFil
 ---------------------------------------------------------------
 Deux Sources de données sont utilisé pour ce projet : 
 1. Des données de News concernant des marques spécifiques de voitures collecté en utilisant [l'API Aylien](https://aylien.com)
-3. Des données de voiture qui contient plusieurs caractéristique et qu'on a pu récupérer sur 
+3. Des données de voiture qui contient plusieurs caractéristique et qu'on a pu récupérer sur [Kaggle] (https://www.kaggle.com/datasets/adityadesai13/used-car-dataset-ford-and-mercedes)
 
 
 
