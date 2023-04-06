@@ -21,6 +21,11 @@ Nos Script sont sauvegardés dans le volume paratgé src. Pour lancer un script 
 ```
 spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.2 pathFile
 ```
+### Les technologies :
+- _Python_: Python est un langage de programmation populaire et flexible qui permet de manipuler des données et de créer des modèles de données complexes.
+- _Streamlit_: Streamlit est un framework web facile à utiliser pour les développeurs Python qui permet de créer des applications web interactives pour l'analyse de données. Il permet également de visualiser les données et de les présenter de manière esthétique, ce qui le rend parfait pour le développement de l'interface utilisateur.
+- _Aylien API_: L'API Aylien est une API de traitement du langage naturel qui permet de réaliser des analyses de sentiment sur les articles de presse. Elle a été choisie pour extraire les données des articles de presse pour ce projet.
+- _Kaggle_:Kaggleestuneplateformedecompétitiondedonnéesenlignequiproposedes ensembles de données pour des projets de science des données. L'ensemble de données de prix des voitures a été téléchargé depuis Kaggle pour ce projet.
 
 ---------------------------------------------------------------
 # La Data
