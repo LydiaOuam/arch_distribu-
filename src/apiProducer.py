@@ -93,22 +93,3 @@ while True:
     time.sleep(2.5)
 
 
-# # Read the data from Kafka topic
-# df_stream = spark.readStream \
-#     .format("kafka") \
-#     .option("kafka.bootstrap.servers", KAFKA_BOOTSTRAP_SERVERS) \
-#     .option("subscribe", KAFKA_TOPIC) \
-#     .load()
-
-# # Deserialize the JSON data and apply the schema
-# df_stream = df_stream.selectExpr("CAST(value AS STRING)") \
-#     .select(from_json(column("value"), SCHEMA).alias("data")) \
-#     .select("data.*")
-
-# # Process and print the data
-# df_stream.writeStream \
-#     .outputMode("append") \
-#     .format("console") \
-#     .option("truncate", "false") \
-#     .start() \
-#     .awaitTermination()
