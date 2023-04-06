@@ -29,6 +29,18 @@ spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.2 pathFil
 - _PySpark_ : Bibliothèque open-source de traitement de données distribuées conçue pour être utilisée avec Apache Spark.
 - _Kafka_ : Kafka est une plate-forme de diffusion de données distribuée open-source qui permet de transférer des flux de données en temps réel entre des applications ou des systèmes.
 
+## Important : 
+Dans le dossier _src_ on trouve : 
+- [Analyses_voitures_api.ipynb](https://github.com/LydiaOuam/arch_distribu-/blob/main/src/Analyses_voitures_api.ipynb) --> le script des visualisation fait sur pandas.
+- [Streamlit.py](https://github.com/LydiaOuam/arch_distribu-/blob/main/src/Streamlit.py) --> un script qui permet de visualiser les données prevenant de l'API en real Time.
+- [apiProducer.py](https://github.com/LydiaOuam/arch_distribu-/blob/main/src/apiProducer.py) --> streamer les données à partir de l'API et cela dans Spark
+- [kafkaProducer.py](https://github.com/LydiaOuam/arch_distribu-/blob/main/src/kafkaProducer.py) --> le producer de l'API mais cette fois ci fait hors spark
+- [producer.py](https://github.com/LydiaOuam/arch_distribu-/blob/main/src/producer.py) --> Simuler le stream à partir d'un fichier CSV et ecrire dans un Topic
+- [consumer3.py](https://github.com/LydiaOuam/arch_distribu-/blob/main/src/consumer3.py) --> Se connecter au topic et passer les données dans le modéle de ML.
+- Dossier __testdata3__ qui contient le csv utilisé dans le producer.py
+- mymodel.parquet le fichier parquet de modéle ML développé.
+
+Le dossier Data dans lequel y a nos deux datasets mentionné au début
 ---------------------------------------------------------------
 # La Data
 ---------------------------------------------------------------
